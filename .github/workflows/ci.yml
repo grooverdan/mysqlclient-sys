@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - master_check
 
 name: CI Tests
 
