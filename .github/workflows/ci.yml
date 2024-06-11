@@ -205,7 +205,7 @@ jobs:
         if: matrix.os != 'Windows' && matrix.features != 'bundled'
         shell: bash
         run: |
-          cat target/debug/build/mysqlclient-sys-*/out/bindings.rs
+          find . -name bindings.rs -ls -exec cat {} \;
 
       - name: Test all files included
         shell: bash
