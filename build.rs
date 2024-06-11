@@ -20,7 +20,9 @@ fn main() {
     println!("cargo::rerun-if-env-changed=MYSQLCLIENT_VERSION_{target}");
     println!("cargo::rerun-if-env-changed=MYSQLCLIENT_LIB_{target}");
     println!("cargo::rerun-if-env-changed=MYSQLCLIENT_STATIC_{target}");
-    let libname = env::var("MYSQLCLIENT_LIBNAME").unwrap_or("mysqlclient".to_string());
+    let libname = env::var("MYSQLCLIENT_LIBNAME")
+        .unwrap_or_else(|_| env::var("MYSQLCLIENT_LIBNAME_{target}")
+            .unwrap_or_else(|_| String::from("mysqlclient")));
     let link_specifier = if env::var("MYSQLCLIENT_STATIC")
         .or(env::var(format!("MYSQLCLIENT_STATIC_{target}")))
         .is_ok()
