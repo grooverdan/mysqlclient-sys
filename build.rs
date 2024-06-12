@@ -192,9 +192,9 @@ fn try_vcpkg() -> Option<Vec<PathBuf>> {
     if let Ok(lib) = vcpkg::find_package("libmariadb") {
         println!("cargo:rustc-link-lib=Secur32");
         println!("cargo:rustc-link-lib=Bcrypt");
-        lib.include_paths
+        Some(lib.include_paths)
     } else if let Ok(lib) = vcpkg::find_package("libmysql") {
-        lib.include_paths
+        Some(lib.include_paths)
     } else {
         None
     }
