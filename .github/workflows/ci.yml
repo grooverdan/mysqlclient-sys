@@ -17,6 +17,7 @@ jobs:
         target: [ mysql, mariadb ]
         os: [ubuntu-latest, macos-13, macos-14, windows-2022]
         features: [default, buildtime_bindgen, bundled]
+        install: [default]
         include:
           - target: mysql
             os: windows-2022
