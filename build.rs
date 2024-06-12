@@ -34,14 +34,14 @@ fn main() {
         // pkg_config did everything but the version flags for us
         parse_version(&lib.version);
         for path in lib.include_paths {
-            let boxed_path: Box<str> = path.to_string_lossy().into();
+            let boxed_path: Box<str> = format!("-I{}", path.to_string_lossy()).into();
             clang_args.push(boxed_path);
         }
     } else if let Ok(lib) = pkg_config::probe_library("libmariadb") {
         // pkg_config did everything but the version flags for us
         parse_version(&lib.version);
         for path in lib.include_paths {
-            let boxed_path: Box<str> = path.to_string_lossy().into();
+            let boxed_path: Box<str> = format!("-I{}", path.to_string_lossy()).into();
             clang_args.push(boxed_path);
         }
     } else if let Some(args) = try_vcpkg() {
