@@ -189,11 +189,11 @@ fn parse_version(version: &str) {
 
 #[cfg(target_env = "msvc")]
 fn try_vcpkg() -> Option<Vec<PathBuf>> {
-    if let Some(lib) = vcpkg::find_package("libmariadb") {
+    if let Ok(lib) = vcpkg::find_package("libmariadb") {
         println!("cargo:rustc-link-lib=Secur32");
         println!("cargo:rustc-link-lib=Bcrypt");
         lib.include_paths
-    } else if let Some(lib) = vcpkg::find_package("libmysql") {
+    } else if let Ok(lib) = vcpkg::find_package("libmysql") {
         lib.include_paths
     } else {
         None
