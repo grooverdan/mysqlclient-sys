@@ -62,7 +62,12 @@ fn main() {
     } else if let Ok(path) =
         env::var("MYSQLCLIENT_LIB_DIR").or(env::var(format!("MYSQLCLIENT_LIB_DIR_{target}")))
     {
-        clang_args.push(format!("-I{}\\..\\include", path).to_string().into_boxed_str());
+        if let Ok(ipath) =
+            env::var("MYSQLCLIENT_INCLUDE_DIR").or(env::var(format!("MYSQLCLIENT_INCLUDE_DIR_{target}"))) {
+            clang_args.push(format!("-I{}", ipath).to_string().into_boxed_str());
+        } else {
+            clang_args.push(format!("-I{}\\..\\include", path).to_string().into_boxed_str());
+        }
         println!("cargo:rustc-link-search=native={path}");
         println!("cargo:rustc-link-lib={link_specifier}{libname}");
         if let Ok(version) =

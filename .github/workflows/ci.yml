@@ -162,6 +162,7 @@ jobs:
         shell: bash
         run: |
           echo "MYSQLCLIENT_LIB_DIR=${{github.workspace}}/mariadb-11.4.2-winx64/lib/" >> $GITHUB_ENV
+          echo "MYSQLCLIENT_INCLUDE_DIR=${{github.workspace}}/mariadb-11.4.2-winx64/include/mysql/" >> $GITHUB_ENV
           echo "MYSQLCLIENT_VERSION=11.4.2" >> $GITHUB_ENV
           echo "MYSQLCLIENT_LIBNAME=mariadbclient" >> $GITHUB_ENV
           dir ./mariadb-11.4.2-winx64/lib
